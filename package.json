@@ -2,7 +2,7 @@
   "name": "social-comm-temporal-graph",
   "version": "0.1.0",
   "private": true,
-  "homepage":"http://shubhanshu.com/social-comm-temporal-graph/public",
+  "homepage":"http://shubhanshu.com/social-comm-temporal-graph/build",
   "dependencies": {
     "d3": "^4.11.0",
     "react": "^16.0.0",
