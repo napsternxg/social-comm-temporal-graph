@@ -13,7 +13,7 @@ class App extends Component {
         {
           group: "Facebook groups",
           items: [
-            {name: "Social Visualization Facebook", value: "fb-group-cs-visual", filename: "datasets/fb-group-cs-visual.json"},
+            {name: "Social Visualization Facebook", value: "fb-group-cs-visual", url: "http://shubhanshu.com/FacebookGroupVisual"},
             {name: "Illini Drones", value: "fb-group-illini-drones"},
             {name: "Illini Skydiving", value: "fb-group-illini-skydiving"}
           ]
@@ -21,22 +21,38 @@ class App extends Component {
         {
           group: "Twitter data",
           items: [
-            {name: "Trump Tweets", value: "tw-trump-tweets"},
+            {name: "Tweets", value: "tw-trump-tweets", url: "http://shubhanshu.com/SentimentSocialNets/"},
           ]
         }
       ],
-      selected: 'fb-group-illini-drones'
-    };
-  
+      selected: 'fb-group-illini-drones',
+    };  
   this.handleDatasetChange = this.handleDatasetChange.bind(this);
+  this.getSelectedItem = this.getSelectedItem.bind(this);
   console.log(process.env.PUBLIC_URL);
   }
 
+  componentWillMount() {
+      this.setState({selectedItem: this.getSelectedItem(this.state.selected)});
+  }
+
+  getSelectedItem(value) {
+    const selectedItem = this.state.datasets.reduce((acc, dataset) => {
+      return acc.concat(dataset.items);
+    }, []).filter((item) => {
+      return item.value === value;
+    });
+    return selectedItem[0];
+  }
+
   handleDatasetChange(event) {
-    this.setState({selected: event.target.value});
+    const selectedItem = this.getSelectedItem(event.target.value);
+    this.setState({selected: event.target.value, selectedItem: selectedItem});
+    console.log(selectedItem);
   }
 
   render() {
+    console.log(this.state);
     return (
       <div className="App">
         <header className="App-header">
@@ -48,7 +64,11 @@ class App extends Component {
         </p>
 
         <div className="charts">
-        <DataSelector datasets={this.state.datasets} selected={this.state.selected} handleDatasetChange={this.handleDatasetChange}/>
+        <DataSelector
+         datasets={this.state.datasets}
+         selected={this.state.selected} 
+         selectedItem={this.state.selectedItem}
+         handleDatasetChange={this.handleDatasetChange}/>
         <SCTGChart/>
         </div>
       </div>
