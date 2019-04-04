@@ -5,8 +5,8 @@ The top panel looks at aggregated data while the bottom one at the more fine gra
 
 ## Examples: 
 
-[Wikipedia Revisions](http://shubhanshu.com/social-comm-temporal-graph/wikipedia-revisions)
-[Facebook Groups](http://shubhanshu.com/FacebookGroupVisual/)
-[Tweet Sentiments](http://shubhanshu.com/SentimentSocialNets/)
+* [Wikipedia Revisions](http://shubhanshu.com/social-comm-temporal-graph/wikipedia-revisions)
+* [Facebook Groups](http://shubhanshu.com/FacebookGroupVisual/)
+* [Tweet Sentiments](http://shubhanshu.com/SentimentSocialNets/)
 
 
