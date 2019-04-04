@@ -21,7 +21,7 @@ function wrap(text, width) {
     attr("y", y).
     attr("dy", dy + "em");
 
-    while (word = words.pop()) {if (window.CP.shouldStopExecution(0)) break;
+    while (word = words.pop()) {
       line.push(word);
       tspan.text(line.join(" "));
       if (tspan.node().getComputedTextLength() > width) {
@@ -35,7 +35,7 @@ function wrap(text, width) {
         attr("dy", dy + "em").
         text(word);
       }
-    }window.CP.exitedLoop(0);
+    }
   });
 }
 
