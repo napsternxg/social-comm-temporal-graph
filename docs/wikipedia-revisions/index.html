@@ -2,106 +2,137 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <title>Social Communication Temporal Graph - Wikipedia Revisions</title>
+  <meta charset="UTF-8">
+  <title>Social Communication Temporal Graph - Wikipedia Revisions</title>
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css'>
-    <style>
-        .node.node-focus .link line {
-            stroke: black;
-            stroke-opacity: 0.8;
-            stroke-width: 0.8;
-        }
+  <meta charset="utf-8">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel='stylesheet'
+    href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css'>
+  <style>
+    .node.node-focus .link line {
+      stroke: black;
+      stroke-opacity: 0.8;
+      stroke-width: 0.8;
+    }
 
-        .node.node-focus circle {
-            stroke: black;
-            stroke-opacity: 1;
-            stroke-width: 1;
-            opacity: 1;
-        }
-    </style>
+    .node.node-focus circle {
+      stroke: black;
+      stroke-opacity: 1;
+      stroke-width: 1;
+      opacity: 1;
+    }
+
+    .legend text.legendTitle {
+      font-weight: bolder;
+    }
+  </style>
 </head>
 
 <body translate="no">
-    <div class="container-fluid">
+  <div class="container-fluid">
 
-        <div class="form">
-        </div>
-        <div class="main">
-            <div class="row">
-                <div class="col-12">
-                    <h1>Wikipedia Revision History for <span id="page-title">Narendra Modi</span>'s Wikipedia page</h1>
-                    <p>Data taken from the wikipedia API to get the last 500 revisions to the page.</p>
-                    <p>This visualization is based on <a href="https://github.com/napsternxg/social-comm-temporal-graph">Social Communication Temporal Graph</a></p>
-					<div id="error-logs"></div>
-                </div>
-            </div>
-            <form onSubmit="return false;">
-                <div class="row">
-                    <div class="col-7">
-                        <label for="wiki-title-input" class="sr-only">Wikipedia Title</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">Wiki Title</div>
-                            </div>
-                            <input type="text" class="form-control" id="wiki-title-input" value="Narendra Modi" placeholder="Password">
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <button type="button" class="btn btn-primary btn-md" id="plot-sctg">Plot</button>
-                    </div>
-                </div>
-            </form>
-            <div class="row">
-                <div class="col-10">
-                    <svg width="960" height="500"></svg>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-7">
-                    <div class="log-data"></div>
-                </div>
-            </div>
-        </div>
+    <div class="form">
     </div>
+    <div class="main">
+      <div class="row">
+        <div class="col-12">
+          <h1>Wikipedia Revision History for <span id="page-title">Narendra
+              Modi</span>'s Wikipedia page</h1>
+          <p>Data taken from the wikipedia API to get the last 500 revisions of
+            the pages. Hover over a node to see details. Top nodes are users and
+			bottom nodes are revisions.</p>
+          <p>This visualization is developed using <a
+              href="https://shubhanshu.com/social-comm-temporal-graph/">Social
+              Communication Temporal Graph</a> library.</p>
+          <div id="error-logs"></div>
+        </div>
+      </div>
+      <form onSubmit="return false;">
+        <div class="row">
+          <div class="col-4">
+            <label for="wiki-title-input" class="sr-only">Wikipedia
+              Title</label>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="input-group-text">Wiki Title 1</div>
+              </div>
+              <input type="text" class="form-control" id="wiki-title-input-1"
+                value="Narendra Modi">
+            </div>
+          </div>
+          <div class="col-4">
+            <label for="wiki-title-input" class="sr-only">Wikipedia
+              Title</label>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="input-group-text">Wiki Title 2</div>
+              </div>
+              <input type="text" class="form-control" id="wiki-title-input-2"
+                value="Rahul Gandhi">
+            </div>
+          </div>
+          <div class="col-3">
+            <button type="button" class="btn btn-primary btn-md"
+              id="plot-sctg">Plot</button>
+          </div>
+        </div>
+      </form>
+      <div class="row">
+        <div class="col-10">
+          <svg width="960" height="500"></svg>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-7">
+          <div class="log-data"></div>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/d3/5.9.2/d3.min.js'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.9.1/d3-tip.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/d3/5.9.2/d3.min.js'>
+</script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.9.1/d3-tip.js'>
+</script>
+<script
+  src='https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.25.6/d3-legend.min.js'>
+</script>
 <script src='../sctg.js'></script>
 <script src="./script.js"></script>
 <script>
-    (function(i, s, o, g, r, a, m) {
-        i['GoogleAnalyticsObject'] = r;
-        i[r] = i[r] || function() {
-            (i[r].q = i[r].q || []).push(arguments)
-        }, i[r].l = 1 * new Date();
-        a = s.createElement(o),
-            m = s.getElementsByTagName(o)[0];
-        a.async = 1;
-        a.src = g;
-        m.parentNode.insertBefore(a, m)
-    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+  (function(i, s, o, g, r, a, m) {
+    i['GoogleAnalyticsObject'] = r;
+    i[r] = i[r] || function() {
+      (i[r].q = i[r].q || []).push(arguments)
+    }, i[r].l = 1 * new Date();
+    a = s.createElement(o),
+      m = s.getElementsByTagName(o)[0];
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m)
+  })(window, document, 'script', '//www.google-analytics.com/analytics.js',
+    'ga');
 
-    ga('create', 'UA-44393164-1', 'shubhanshu.com');
-    ga('send', 'pageview');
+  ga('create', 'UA-44393164-1', 'shubhanshu.com');
+  ga('send', 'pageview');
 </script>
 <script type="application/ld+json">
-    {
-        "@context": "http://schema.org",
-        "@type": "Person",
-        "name": "Shubhanshu Mishra",
-        "url": "http://shubhanshu.com",
-        "logo": "http://shubhanshu.com/assets/images/pic.jpg"
-        "sameAs": [
+  {
+    "@context": "http://schema.org",
+    "@type": "Person",
+    "name": "Shubhanshu Mishra",
+    "url": "http://shubhanshu.com",
+    "logo": "http://shubhanshu.com/assets/images/pic.jpg"
+    "sameAs": [
             "https://www.facebook.com/shubhanshu.mishra",
             "https://instagram.com/shubhanshumishra/",
             "https://twitter.com/TheShubhanshu"
             "http://www.linkedin.com/in/shubhanshumishra",
             "https://plus.google.com/+ShubhanshuMishra"
         ]
-    }
+  }
 </script>
 
 </html>
