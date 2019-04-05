@@ -17,17 +17,30 @@ function getParsedData(data) {
   return revisions;
 }
 
+function getTitleInput(){
+	var wiki_title_input_1 = d3.select("#wiki-title-input-1").property("value");
+	var wiki_title_input_2 = d3.select("#wiki-title-input-2").property("value");
+	const title_input = [
+		wiki_title_input_1,
+		wiki_title_input_2,
+	].filter(x => x);
+	console.log(title_input);
+	var url = new URL(window.location.href);
+	var search_params = new URLSearchParams();
+	for(var i=0; i<title_input.length; i++){
+		search_params.set(`wiki_title_input_${i+1}`, title_input[i]);
+	}
+	url.search = search_params.toString();
+	history.replaceState(null, "", url.search.toString());
+	return title_input;
+}
+
 function createWikiPlot(callback) {
   /**
    * To fetch data from wikipedia API, we need to add origin=* to the get parameter request
    **/
   if (callback) callback();
-  const title_input = [
-    d3.select("#wiki-title-input-1").property("value"),
-    d3.select("#wiki-title-input-2").property("value"),
-  ].filter(x => x);
-  console.log(title_input);
-
+  const title_input = getTitleInput()
   const data_promises = Promise.all(
     title_input.map(title => {
       const URL =
@@ -102,24 +115,38 @@ function createPlot(revisions, title_input) {
     },
     bottom: {
       title: "Revisions",
-      y_axis_label: "Size of revision (bytes)",
+      y_axis_label: "Size of revision",
       size_label: "Size of revision"
     }
   };
 
-  var topColorScale = d3.scaleOrdinal()
-    .domain([].concat(["Both"], title_input))
-    .range(["DodgerBlue", "Crimson", "DarkOliveGreen"]);
+  function getTopColorScale(title_input){
+	  var range = [
+		d3.color("Crimson").darker(), 
+		d3.color("DarkOliveGreen").darker()
+	  ]
+	  const domain = title_input.length == 1 ? title_input : [].concat(["Both"], title_input);
+	  range = title_input.length == 1 ? range : [].concat([d3.color("DodgerBlue").darker()], range);
+	  console.log(domain, range);
+	  return d3.scaleOrdinal()
+				.domain(domain)
+				.range(range);
+	  
+  }
+  
+  var topColorScale = getTopColorScale(title_input);
 
   var getTopColor = title_counts => {
-    console.log(title_counts);
     var x = title_counts.length > 1 ? "Both" : title_counts[0].key;
     return topColorScale(x);
   };
 
   var bottomColorScale = d3.scaleOrdinal()
     .domain(title_input)
-    .range(["Crimson", "DarkOliveGreen"]);
+    .range([
+		d3.color("Crimson").brighter(), 
+		d3.color("DarkOliveGreen").brighter()
+	]);
 
   var topToolTipKeyValues = function(entries) {
     return entries.map(d => `
@@ -173,7 +200,7 @@ d.id
     size_fn: d => d.total_size,
     color_fn: d => getTopColor(d.value.title_counts),
     y_scale: d3.scaleLog().range([0, -plot_sizes.top]),
-    size_scale: d3.scaleLog().range([3, 10]),
+    size_scale: d3.scaleLinear().range([6, 12]),
     toolTipContent: getTopTooltipContent
   };
 
@@ -184,7 +211,7 @@ d.id
     y_scale: d3.
     scaleLinear().
     range([plot_sizes.bottom + plot_sizes.offset, plot_sizes.offset]),
-    size_scale: d3.scaleLog().range([2, 6]),
+    size_scale: d3.scaleLinear().range([2, 6]),
     toolTipContent: getBottomTooltipContent
   };
 
@@ -259,6 +286,18 @@ d.id
       createWikiPlot();
     });
   };
+  const current_url = new URL(window.location.href);
+  const params = current_url.searchParams;
+  console.log(params.get("wiki_title_input_1"), params.get("wiki_title_input_2"));
+  var wiki_title_input_1 = params.get("wiki_title_input_1");
+  var wiki_title_input_2 = params.get("wiki_title_input_2");
+  if(!wiki_title_input_1 && !wiki_title_input_2){
+	  wiki_title_input_1 = "Narendra Modi";
+	  wiki_title_input_2 = "Rahul Gandhi";
+  }
+  console.log(wiki_title_input_1, wiki_title_input_2);
+  d3.select("#wiki-title-input-1").property("value", wiki_title_input_1);
+  d3.select("#wiki-title-input-2").property("value", wiki_title_input_2);
   console.log("Creating initial wikiplot");
   createWikiPlot(callback);
 })();

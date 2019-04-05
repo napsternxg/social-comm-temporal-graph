@@ -257,8 +257,8 @@
           attr("r", d => d.layout.size).
           attr("cx", d => d.layout.x).
           attr("cy", d => d.layout.y).
-          attr("fill", config.bottom.color_fn).
-          attr("opacity", 0.1).
+		  attr("fill", config.bottom.color_fn).
+          attr("opacity", 0.3).
           on("mouseover", function(d) {
               bottomTooltip.show(d, this);
               const parent = d3.select(this.parentNode.parentNode);
@@ -420,7 +420,7 @@
           style("text-anchor", "left").
           style("font-weight", "bolder").
           style("font-size", "large").
-          text(`Node height=${style_config.top.y_axis_label}`).
+          text(`y=${style_config.top.y_axis_label}`).
           call(wrap, 200);
 
           svg.
@@ -436,7 +436,7 @@
           style("text-anchor", "left").
           style("font-weight", "bolder").
           style("font-size", "large").
-          text(`Node size=${style_config.top.size_label}`).
+          text(`size=${style_config.top.size_label}`).
           call(wrap, 200);
 
           //Bottom texts
@@ -470,7 +470,7 @@
           style("text-anchor", "left").
           style("font-weight", "bolder").
           style("font-size", "large").
-          text(`Node height=${style_config.bottom.y_axis_label}`).
+          text(`y=${style_config.bottom.y_axis_label}`).
           call(wrap, 200);
 
           svg.
@@ -486,6 +486,6 @@
           style("text-anchor", "left").
           style("font-weight", "bolder").
           style("font-size", "large").
-          text(`Node size=${style_config.bottom.size_label}`).
+          text(`size=${style_config.bottom.size_label}`).
           call(wrap, 200);
       }
