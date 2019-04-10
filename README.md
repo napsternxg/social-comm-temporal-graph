@@ -10,3 +10,9 @@ The top panel looks at aggregated data while the bottom one at the more fine gra
 * [Tweet Sentiments](https://shubhanshu.com/SentimentSocialNets/)
 
 
+## Developer
+
+```
+npm install . # installs the required packages.
+npm build # creates the minified files
+```

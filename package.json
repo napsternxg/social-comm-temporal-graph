@@ -1,0 +1,27 @@
+{
+  "name": "sctg",
+  "version": "0.0.1",
+  "description": "These visualizations use 2 panels to plot connected data points which are temporally distributed. \r The top panel looks at aggregated data while the bottom one at the more fine grained data.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npx rollup --config"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/napsternxg/social-comm-temporal-graph.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/napsternxg/social-comm-temporal-graph/issues"
+  },
+  "homepage": "https://github.com/napsternxg/social-comm-temporal-graph#readme",
+  "devDependencies": {
+    "rollup": "^1.9.3"
+  }
+}

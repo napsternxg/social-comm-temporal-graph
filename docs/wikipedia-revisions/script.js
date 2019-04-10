@@ -220,7 +220,7 @@ d.id
     bottom: bottom_config
   };
 
-  sctg_layout = sctg().
+  sctg_layout = sctg.computeLayout().
   topNodeKey(d => d.user).
   topTimeKey(d => d.time_first_occurence).
   bottomTimeKey(d => d.timestamp).
@@ -248,7 +248,7 @@ d.id
 
   const logDiv = mainDiv.select("div.log-data");
 
-  draw(sctg_layout_values, svg, logDiv, config, style_config);
+  sctg.draw(sctg_layout_values, svg, logDiv, config, style_config);
 
   svg.append("g")
     .classed("legend", true)
