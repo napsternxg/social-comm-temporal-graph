@@ -9,10 +9,19 @@ The top panel looks at aggregated data while the bottom one at the more fine gra
 * [Facebook Groups](https://shubhanshu.com/FacebookGroupVisual/)
 * [Tweet Sentiments](https://shubhanshu.com/SentimentSocialNets/)
 
+## Usage
+
+```html
+<!-- For minified version include the following -->
+<script src="https://cdn.jsdelivr.net/gh/napsternxg/social-comm-temporal-graph/docs/sctg.min.js"></script>
+<!-- For non-minified version include the following -->
+<script src="https://cdn.jsdelivr.net/gh/napsternxg/social-comm-temporal-graph/docs/sctg.js"></script>
+```
+
 
 ## Developer
 
 ```
 npm install . # installs the required packages.
-npm build # creates the minified files
+npm run rollup # creates the rollup file in docs
 ```

@@ -10,16 +10,5 @@ const config = {
   };
   
   export default [
-    config,
-    {
-      ...config,
-      output: {
-        ...config.output,
-        file: `docs/${module_name}.min.js`,
-        compact: true
-      },
-      plugins: [
-        ...config.plugins,
-      ]
-    }
+    config
   ];
