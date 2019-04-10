@@ -12,6 +12,11 @@ The top panel looks at aggregated data while the bottom one at the more fine gra
 ## Usage
 
 ```html
+<!-- The library relies on d3, d3-tip, and d3-legend, include them as follows -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/d3/5.9.2/d3.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.9.1/d3-tip.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.25.6/d3-legend.min.js'></script>
+
 <!-- For minified version include the following -->
 <script src="https://cdn.jsdelivr.net/gh/napsternxg/social-comm-temporal-graph/docs/sctg.min.js"></script>
 <!-- For non-minified version include the following -->
