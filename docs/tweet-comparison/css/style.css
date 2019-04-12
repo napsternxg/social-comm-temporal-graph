@@ -1,0 +1,20 @@
+.node.node-focus .link line {
+  stroke: black;
+  stroke-opacity: 0.8;
+  stroke-width: 0.8;
+}
+
+.node.node-focus circle {
+  stroke: black;
+  stroke-opacity: 1;
+  stroke-width: 1;
+  opacity: 1;
+}
+
+.legend text.legendTitle {
+  font-weight: bolder;
+}
+
+.juniper-output {
+  background-color: #ffffff;
+}
