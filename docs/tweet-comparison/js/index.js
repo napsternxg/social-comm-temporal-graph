@@ -1,3 +1,4 @@
+const STORAGE_KEY="tweet_compare";
 function activate(){
   new Juniper({
     repo: 'napsternxg/SocialMediaDownloader',
@@ -11,16 +12,16 @@ function activate(){
 
 function parseOutput(){
   const outputNode = document.querySelector('div.juniper-cell > div.juniper-output > div > div > div.p-Widget.jp-RenderedText.jp-mod-trusted.jp-OutputArea-output > pre');
-  const message = `localStorage "sctg_data" updated with new tweets data of ${outputNode.textContent.length} chars.`;
+  const message = `localStorage "sctg_data_${STORAGE_KEY}" updated with new tweets data of ${outputNode.textContent.length} chars.`;
   console.log(message);
-  localStorage.setItem("sctg_data", outputNode.textContent);
+  localStorage.setItem(`sctg_data_${STORAGE_KEY}`, outputNode.textContent);
   d3.select("#dataStatus").html(message);
 }
 
 function getData(){
-  var data = JSON.parse(localStorage.getItem("sctg_data"));
+  var data = JSON.parse(localStorage.getItem(`sctg_data_${STORAGE_KEY}`));
   const dataStatusNode = d3.select("#dataStatus");
-  const search_query = JSON.parse(localStorage.getItem("sctg_query"));
+  const search_query = JSON.parse(localStorage.getItem(`sctg_query_${STORAGE_KEY}`));
   var status = "No data in localStorage."
   if(data){
     data = Object.entries(data);
@@ -59,7 +60,7 @@ function getCredentials(){
 function updateCode(){
   const credentials = getCredentials();
   const search_query = [1,2].map(i=> d3.select(`#search_query_${i}`).property("value") ).filter(x => x);
-  localStorage.setItem("sctg_query", JSON.stringify(search_query));
+  localStorage.setItem(`sctg_query_${STORAGE_KEY}`, JSON.stringify(search_query));
   const code_block = document.querySelector("pre");
   code_block.textContent = `
 from twarc import Twarc
@@ -132,7 +133,7 @@ function getParsedData(data_entry) {
 }
 
 function getSearchQueries(){
-  const search_query = localStorage.getItem("sctg_query");
+  const search_query = localStorage.getItem(`sctg_query_${STORAGE_KEY}`);
 	const search_queries = JSON.parse(search_query).filter(x => x);
 	console.log(search_queries);
 	var url = new URL(window.location.href);
