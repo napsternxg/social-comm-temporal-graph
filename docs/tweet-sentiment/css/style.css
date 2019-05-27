@@ -18,3 +18,7 @@
 .juniper-output {
   background-color: #ffffff;
 }
+
+.d3-tip {
+  width: 50%;
+}
