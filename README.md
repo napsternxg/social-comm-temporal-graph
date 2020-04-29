@@ -30,3 +30,8 @@ The top panel looks at aggregated data while the bottom one at the more fine gra
 npm install . # installs the required packages.
 npm run rollup # creates the rollup file in docs
 ```
+
+## TODO
+
+* Allow easy integration with React - https://nicolashery.com/integrating-d3js-visualizations-in-a-react-app/
+* Convert into plotly dash component - https://gist.github.com/alexcjohnson/a4b714eee8afd2123ee00cb5b3278a5f
